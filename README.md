@@ -173,8 +173,17 @@ mk-students/
 
 ## 📸 Screenshots
 
-*(Coming soon)*
+### 🔐 Login / Register Page
 
+![Login Page](screenshots/login.png)
+
+### 👤 User Dashboard
+
+![User Dashboard](screenshots/user-dashboard.png)
+
+### 🛠️ Admin Dashboard
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
 ---
 
 ## 📄 License
