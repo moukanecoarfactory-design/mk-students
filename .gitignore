@@ -1,0 +1,67 @@
+# ============================
+# SECRETS — NEVER PUSH THESE
+# ============================
+config/database.php
+config/google.php
+config/github.php
+config/facebook.php
+
+# ============================
+# USER UPLOADS
+# ============================
+uploads/
+uploads/profiles/*
+!uploads/profiles/default-avatar.png
+
+# ============================
+# LOGS
+# ============================
+*.log
+error.log
+access.log
+
+# ============================
+# ENVIRONMENT FILES
+# ============================
+.env
+.env.local
+.env.*.php
+
+# ============================
+# OS FILES
+# ============================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================
+# IDE / EDITOR FILES
+# ============================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ============================
+# DEPENDENCIES (if you add Composer later)
+# ============================
+/vendor/
+node_modules/
+composer.lock
+package-lock.json
+
+# ============================
+# TEMP FILES
+# ============================
+*.tmp
+*.bak
+*.old
+*.orig
