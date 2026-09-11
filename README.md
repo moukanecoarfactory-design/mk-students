@@ -76,7 +76,7 @@ C:\xampp\htdocs\mk-students\
 Open phpMyAdmin → create a database named:
 
 ```
-studenthub-db
+mk-students
 ```
 
 Then import the SQL schema (if `database.sql` is provided) or run the setup queries manually.
