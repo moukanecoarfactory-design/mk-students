@@ -11,7 +11,7 @@
 $host     = "localhost";
 $user     = "root";              // ← your MySQL username
 $password = "";                  // ← your MySQL password (empty by default in XAMPP)
-$database = "studenthub-db";     // ← your database name
+$database = "mk-students";     // ← your database name
 
 $conn = new mysqli($host, $user, $password, $database);
 
