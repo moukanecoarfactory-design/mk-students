@@ -24,22 +24,31 @@ if ($isAdmin) {
         ['href' => $prefix . 'user/change-password.php',  'icon' => 'fa-lock',       'label' => 'Security',      'match' => 'change-password.php'],
     ];
 } else {
-   $navLinks = [
-    ['href' => $prefix . 'user/dashboard.php',        'icon' => 'fa-gauge-high',    'label' => 'Dashboard',     'match' => 'dashboard.php'],
-    ['href' => $prefix . 'announcements.php',         'icon' => 'fa-bullhorn',      'label' => 'Announcements', 'match' => 'announcements.php'],
-    ['href' => $prefix . 'courses.php',               'icon' => 'fa-book',          'label' => 'Courses',       'match' => 'courses.php'],
-    ['href' => $prefix . 'user/my-courses.php',       'icon' => 'fa-graduation-cap','label' => 'My Courses',    'match' => 'my-courses.php'],
-    ['href' => $prefix . 'user/profile.php',          'icon' => 'fa-user',          'label' => 'Profile',       'match' => 'profile.php'],
-    ['href' => $prefix . 'user/skills.php',           'icon' => 'fa-lightbulb',     'label' => 'Skills',        'match' => 'skills.php'],
-];
+    $navLinks = [
+        ['href' => $prefix . 'user/dashboard.php',        'icon' => 'fa-house',         'label' => 'Dashboard',     'match' => 'dashboard.php'],
+        ['href' => $prefix . 'announcements.php',         'icon' => 'fa-bullhorn',      'label' => 'Announcements', 'match' => 'announcements.php'],
+        ['href' => $prefix . 'courses.php',               'icon' => 'fa-book',          'label' => 'Courses',       'match' => 'courses.php'],
+        ['href' => $prefix . 'user/my-courses.php',       'icon' => 'fa-graduation-cap','label' => 'My Courses',    'match' => 'my-courses.php'],
+        ['href' => $prefix . 'user/profile.php',          'icon' => 'fa-user',          'label' => 'Profile',       'match' => 'profile.php'],
+        ['href' => $prefix . 'user/skills.php',           'icon' => 'fa-lightbulb',     'label' => 'Skills',        'match' => 'skills.php'],
+    ];
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title><?php echo $pageTitle ?? 'Mk.Students'; ?></title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="<?php echo $prefix; ?>manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MK Students">
+    <link rel="icon" type="image/png" href="<?php echo $prefix; ?>assets/icon-192.png">
+    <link rel="apple-touch-icon" href="<?php echo $prefix; ?>assets/icon-192.png">
 
     <link rel="stylesheet" href="<?php echo $prefix; ?>css/style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -182,16 +191,7 @@ if ($isAdmin) {
         .mobile-panel a:hover, .mobile-panel a.active {
             background: rgba(102, 126, 234, 0.2); color: #fff;
         }
-        @media (max-width: 900px) {
-            .navbar { padding: 12px 20px; }
-            .navbar .center-links { display: none; }
-            .navbar .brand-text { font-size: 16px; }
-            .navbar .hamburger { display: flex; }
-        }
-        @media (max-width: 500px) {
-            .navbar .user-btn .uname { display: none; }
-            .navbar .role-pill { display: none; }
-        }
+
         /* ===== SHOW / HIDE PASSWORD ===== */
         .pwd-wrap { position: relative; width: 100%; }
         .pwd-wrap input { padding-right: 46px !important; }
@@ -205,6 +205,80 @@ if ($isAdmin) {
         }
         .pwd-toggle:hover { color: #667eea; transform: translateY(-50%) scale(1.15); }
         .pwd-toggle.showing { color: #667eea; }
+
+        /* =====================================================
+           MOBILE BOTTOM NAVBAR (Instagram-style)
+        ===================================================== */
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 66px;
+            background: rgba(20, 25, 55, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 997;
+            padding: 6px 8px;
+            padding-bottom: calc(6px + env(safe-area-inset-bottom));
+        }
+        .mobile-bottom-nav .bn-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .mobile-bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            flex: 1;
+            padding: 6px 0;
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            font-size: 9.5px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: 0.22s;
+            position: relative;
+        }
+        .mobile-bottom-nav a i {
+            font-size: 18px;
+            transition: 0.22s;
+        }
+        .mobile-bottom-nav a.active {
+            color: #fff;
+        }
+        .mobile-bottom-nav a.active i {
+            color: #a8b8ff;
+            transform: scale(1.1);
+        }
+        .mobile-bottom-nav a.active::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 22px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 0 0 3px 3px;
+        }
+
+        @media (max-width: 900px) {
+            .navbar { padding: 12px 20px; }
+            .navbar .center-links { display: none; }
+            .navbar .brand-text { font-size: 16px; }
+            .navbar .hamburger { display: none; }
+            .mobile-bottom-nav { display: block; }
+            body { padding-bottom: 80px !important; }
+        }
+        @media (max-width: 500px) {
+            .navbar .user-btn .uname { display: none; }
+            .navbar .role-pill { display: none; }
+        }
     </style>
 </head>
 <body class="dashboard-body">
@@ -277,7 +351,7 @@ if ($isAdmin) {
 
 </nav>
 
-<!-- Mobile panel -->
+<!-- Mobile panel (legacy) -->
 <div class="mobile-panel" id="mobilePanel">
     <?php foreach ($navLinks as $link):
         $active = ($currentPage === $link['match']) ? 'active' : '';
@@ -291,6 +365,34 @@ if ($isAdmin) {
         <i class="fa-solid fa-right-from-bracket"></i> Logout
     </a>
 </div>
+
+<?php if (isset($_SESSION['user_id'])): ?>
+<!-- MOBILE BOTTOM NAVBAR -->
+<nav class="mobile-bottom-nav">
+    <div class="bn-inner">
+        <?php 
+        // Show only first 4 nav links + logout on mobile
+        $mobileLinks = array_slice($navLinks, 0, 4);
+        foreach ($mobileLinks as $link): 
+            $active = ($currentPage === $link['match']) ? 'active' : '';
+            $short = $link['label'];
+            if ($short === 'Dashboard') $short = 'Home';
+            if ($short === 'Announcements') $short = 'News';
+            if ($short === 'My Courses') $short = 'Courses';
+        ?>
+            <a href="<?php echo $link['href']; ?>" class="<?php echo $active; ?>">
+                <i class="fa-solid <?php echo $link['icon']; ?>"></i>
+                <span><?php echo $short; ?></span>
+            </a>
+        <?php endforeach; ?>
+
+        <a href="<?php echo $prefix; ?>user/profile.php">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</nav>
+<?php endif; ?>
 
 <script>
     // User dropdown toggle
@@ -331,6 +433,14 @@ if ($isAdmin) {
             btn.textContent = '👁️';
             btn.classList.remove('showing');
         }
+    }
+
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('<?php echo $prefix; ?>sw.js')
+                .catch((err) => console.log('SW registration failed:', err));
+        });
     }
 </script>
 
