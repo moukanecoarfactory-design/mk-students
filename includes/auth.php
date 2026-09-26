@@ -9,10 +9,18 @@ function isLoggedIn() {
     return isset($_SESSION['user_id']);
 }
 
-// Restrict access to logged-in users only
+// Require login — for pages INSIDE subfolders (user/, admin/)
 function requireUser() {
     if (!isLoggedIn()) {
         header("Location: ../index.php");
+        exit();
+    }
+}
+
+// Require login — for pages AT THE ROOT (announcements.php, courses.php)
+function requireLogin() {
+    if (!isLoggedIn()) {
+        header("Location: index.php");
         exit();
     }
 }

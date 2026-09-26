@@ -11,16 +11,20 @@ require_once 'config/database.php';
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f4f7fc;
+        html, body {
+            background:
+                radial-gradient(circle at 15% 15%, rgba(102, 126, 234, 0.35), transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(118, 75, 162, 0.4), transparent 45%),
+                linear-gradient(135deg, #1e2340 0%, #2d1b4e 50%, #1e2340 100%);
+            background-attachment: fixed;
             color: #333;
             min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
         }
 
@@ -32,11 +36,11 @@ require_once 'config/database.php';
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 60px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px rgba(45, 58, 100, 0.06);
-            border-bottom: 1px solid rgba(102, 126, 234, 0.08);
+            padding: 18px 60px;
+            background: rgba(20, 25, 55, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .top-nav .brand {
@@ -46,20 +50,20 @@ require_once 'config/database.php';
             font-family: 'Playfair Display', serif;
             font-size: 22px;
             font-weight: 800;
-            color: #17213c;
+            color: #fff;
             text-decoration: none;
             letter-spacing: -0.3px;
         }
         .top-nav .brand-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.35);
+            box-shadow: 0 8px 22px rgba(102, 126, 234, 0.5);
         }
 
         .top-nav .nav-links {
@@ -68,7 +72,7 @@ require_once 'config/database.php';
             list-style: none;
         }
         .top-nav .nav-links a {
-            color: #555;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 14.5px;
             font-weight: 500;
@@ -76,7 +80,7 @@ require_once 'config/database.php';
             position: relative;
         }
         .top-nav .nav-links a:hover {
-            color: #667eea;
+            color: #fff;
         }
         .top-nav .nav-links a::after {
             content: "";
@@ -85,7 +89,7 @@ require_once 'config/database.php';
             bottom: -6px;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #a8b8ff, #d4a8ff);
             transition: 0.3s;
         }
         .top-nav .nav-links a:hover::after {
@@ -96,18 +100,18 @@ require_once 'config/database.php';
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            max-width: 1250px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: 50px auto;
             background: #fff;
-            border-radius: 28px;
+            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 25px 70px rgba(45, 58, 100, 0.15);
-            min-height: 640px;
-            animation: fadeUp 0.7s ease both;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+            min-height: 660px;
+            animation: fadeUp 0.8s ease both;
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(25px); }
+            from { opacity: 0; transform: translateY(30px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
@@ -122,7 +126,7 @@ require_once 'config/database.php';
 
         .form-panel h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 32px;
+            font-size: 34px;
             color: #17213c;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
@@ -134,20 +138,25 @@ require_once 'config/database.php';
         }
 
         .form-container { display: none; }
-        .form-container.active { display: block; }
+        .form-container.active { display: block; animation: fadeIn 0.4s ease both; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
 
         .form-group { margin-bottom: 18px; }
         .form-group label {
             display: block;
             margin-bottom: 7px;
             color: #555;
-            font-weight: 500;
-            font-size: 13.5px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .input-wrap {
-            position: relative;
-        }
+        .input-wrap { position: relative; }
         .input-wrap .field-icon {
             position: absolute;
             left: 15px;
@@ -175,7 +184,7 @@ require_once 'config/database.php';
             outline: none;
             border-color: #667eea;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
         }
         .input-wrap input:focus ~ .field-icon {
             color: #667eea;
@@ -189,33 +198,35 @@ require_once 'config/database.php';
 
         .btn-login, .btn-register {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 12px;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: 0.25s;
+            transition: 0.28s;
             margin-top: 8px;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.25);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.35);
+            font-family: inherit;
+            letter-spacing: 0.3px;
         }
         .btn-login:hover, .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(102, 126, 234, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(102, 126, 234, 0.5);
         }
 
         .register-link, .login-link {
             text-align: center;
             color: #666;
             font-size: 13.5px;
-            margin-top: 20px;
+            margin-top: 22px;
         }
         .register-link a, .login-link a {
             color: #667eea;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
         }
         .register-link a:hover, .login-link a:hover {
@@ -226,12 +237,12 @@ require_once 'config/database.php';
         .social-divider {
             display: flex;
             align-items: center;
-            margin: 22px 0 14px;
+            margin: 24px 0 14px;
             color: #a0a8be;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 11.5px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1.2px;
         }
         .social-divider::before,
         .social-divider::after {
@@ -267,7 +278,7 @@ require_once 'config/database.php';
         }
         .social-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(45, 58, 100, 0.12);
+            box-shadow: 0 8px 20px rgba(45, 58, 100, 0.15);
             border-color: #d4d9e3;
         }
         .google-btn:hover { background: #fafafa; }
@@ -305,8 +316,8 @@ require_once 'config/database.php';
         .hero-panel {
             position: relative;
             background:
-                linear-gradient(135deg, rgba(102, 126, 234, 0.88) 0%, rgba(118, 75, 162, 0.92) 100%),
-                url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+                linear-gradient(135deg, rgba(30, 35, 64, 0.85) 0%, rgba(76, 45, 128, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
             padding: 55px 45px;
             color: #fff;
             display: flex;
@@ -314,24 +325,33 @@ require_once 'config/database.php';
             justify-content: center;
             text-align: center;
         }
+        .hero-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(168, 184, 255, 0.15), transparent 60%);
+            pointer-events: none;
+        }
+        .hero-panel > * { position: relative; z-index: 1; }
 
         .hero-panel .crest {
-            width: 78px;
-            height: 78px;
-            margin: 0 auto 22px;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 24px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.18);
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1.5px solid rgba(255, 255, 255, 0.28);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
-            backdrop-filter: blur(8px);
+            font-size: 42px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .hero-panel h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 700;
             margin-bottom: 14px;
             line-height: 1.2;
@@ -340,9 +360,9 @@ require_once 'config/database.php';
         .hero-panel .tagline {
             font-size: 14.5px;
             line-height: 1.7;
-            opacity: 0.92;
+            opacity: 0.85;
             max-width: 360px;
-            margin: 0 auto 26px;
+            margin: 0 auto 28px;
             font-weight: 300;
         }
 
@@ -351,44 +371,43 @@ require_once 'config/database.php';
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
         .feature-item {
-            background: rgba(255, 255, 255, 0.16);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 9px 17px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 10px 18px;
             border-radius: 30px;
             font-size: 12.5px;
-            font-weight: 500;
-            backdrop-filter: blur(8px);
+            font-weight: 600;
+            backdrop-filter: blur(10px);
             transition: 0.25s;
         }
         .feature-item:hover {
-            background: rgba(255, 255, 255, 0.28);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.22);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
         }
 
-        /* Trust badges */
+        /* Trust */
         .trust {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding-top: 22px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            gap: 14px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
         }
-        .avatars {
-            display: flex;
-        }
+        .avatars { display: flex; }
         .avatars span {
-            width: 30px;
-            height: 30px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.9);
-            margin-left: -10px;
+            margin-left: -12px;
             background-size: cover;
             background-position: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
         .avatars span:first-child { margin-left: 0; }
         .avatar-1 { background-image: url('https://i.pravatar.cc/80?img=12'); }
@@ -396,7 +415,7 @@ require_once 'config/database.php';
         .avatar-3 { background-image: url('https://i.pravatar.cc/80?img=56'); }
         .avatar-4 { background-image: url('https://i.pravatar.cc/80?img=8');  }
         .trust-text {
-            font-size: 12.5px;
+            font-size: 13px;
             opacity: 0.9;
             font-weight: 500;
         }
@@ -405,11 +424,11 @@ require_once 'config/database.php';
         /* ================= FOOTER ================= */
         .footer {
             text-align: center;
-            padding: 26px 20px;
-            color: #8a92a6;
+            padding: 30px 20px;
+            color: rgba(255, 255, 255, 0.45);
             font-size: 13px;
         }
-        .footer span { color: #667eea; font-weight: 600; }
+        .footer span { color: #a8b8ff; font-weight: 700; }
 
         /* ============== RESPONSIVE ============== */
         @media (max-width: 980px) {
@@ -417,20 +436,51 @@ require_once 'config/database.php';
                 grid-template-columns: 1fr;
                 margin: 20px;
             }
-            .hero-panel { order: -1; padding: 40px 30px; }
-            .hero-panel h2 { font-size: 26px; }
+            .hero-panel { order: -1; padding: 45px 30px; }
+            .hero-panel h2 { font-size: 28px; }
             .form-panel { padding: 40px 30px; }
         }
 
         @media (max-width: 700px) {
             .top-nav { padding: 14px 22px; }
             .top-nav .nav-links { display: none; }
-            .form-panel { padding: 32px 22px; }
+            .form-panel { padding: 32px 24px; }
             .form-panel h1 { font-size: 26px; }
             .form-row { grid-template-columns: 1fr; }
             .social-buttons { grid-template-columns: 1fr; }
             .hero-panel h2 { font-size: 24px; }
         }
+        /* ===== SHOW / HIDE PASSWORD ===== */
+.pwd-wrap {
+    position: relative;
+    width: 100%;
+}
+.pwd-wrap input {
+    padding-right: 46px !important;
+}
+.pwd-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    color: #a0a8be;
+    transition: 0.2s;
+    user-select: none;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    padding: 0;
+    line-height: 1;
+}
+.pwd-toggle:hover {
+    color: #667eea;
+    transform: translateY(-50%) scale(1.15);
+}
+.pwd-toggle.showing {
+    color: #667eea;
+}
     </style>
 </head>
 <body>
@@ -472,15 +522,21 @@ require_once 'config/database.php';
                     </div>
 
                     <div class="form-group">
-                        <label>Password</label>
-                        <div class="input-wrap">
-                            <input type="password" name="password" placeholder="Enter your password" required>
-                            <span class="field-icon">🔒</span>
-                        </div>
-                    </div>
+    <label>Password</label>
+    <div class="input-wrap pwd-wrap">
+        <input type="password" name="password" placeholder="Enter your password" required>
+        <span class="field-icon">🔒</span>
+        <button type="button" class="pwd-toggle" onclick="togglePassword(this)">👁️</button>
+    </div>
+</div>
 
                     <button type="submit" name="login" class="btn-login">Login →</button>
-
+<div style="text-align: right; margin-top: 10px;">
+    <a href="forgot-password.php" 
+       style="color:#667eea;font-size:13px;font-weight:600;text-decoration:none;">
+        Forgot password?
+    </a>
+</div>
                     <!-- SOCIAL -->
                     <div class="social-divider">
                         <span>Or continue with</span>
@@ -546,18 +602,20 @@ require_once 'config/database.php';
 
                     <div class="form-group">
                         <label>Password</label>
-                        <div class="input-wrap">
-                            <input type="password" name="password" placeholder="Min 8 characters" required>
-                            <span class="field-icon">🔒</span>
-                        </div>
+                        <div class="input-wrap pwd-wrap">
+    <input type="password" name="password" placeholder="Min 8 characters" required>
+    <span class="field-icon">🔒</span>
+    <button type="button" class="pwd-toggle" onclick="togglePassword(this)">👁️</button>
+</div>
                     </div>
 
                     <div class="form-group">
                         <label>Confirm Password</label>
-                        <div class="input-wrap">
-                            <input type="password" name="password_confirm" placeholder="Repeat password" required>
-                            <span class="field-icon">🔒</span>
-                        </div>
+                        <div class="input-wrap pwd-wrap">
+    <input type="password" name="password_confirm" placeholder="Repeat password" required>
+    <span class="field-icon">🔒</span>
+    <button type="button" class="pwd-toggle" onclick="togglePassword(this)">👁️</button>
+</div>
                     </div>
 
                     <div class="form-group">
@@ -619,6 +677,19 @@ require_once 'config/database.php';
     </footer>
 
     <script>
+        function togglePassword(btn) {
+    const wrap = btn.closest('.pwd-wrap');
+    const input = wrap.querySelector('input');
+    if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+        btn.classList.add('showing');
+    } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+        btn.classList.remove('showing');
+    }
+}
         function toggleForms() {
             const loginForm = document.getElementById('loginForm');
             const registerForm = document.getElementById('registerForm');

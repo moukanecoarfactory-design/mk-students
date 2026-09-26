@@ -9,7 +9,6 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #f4f7fc;
     color: #333;
 }
 
@@ -994,4 +993,18 @@ SOCIAL LOGIN BUTTONS
 .filter-btn.outline:hover {
     border-color: #5e7ce9;
     color: #5e7ce9;
+}
+
+/* ============================================================
+   DARK THEME OVERRIDE
+   Applied when body has class="dashboard-body"
+============================================================ */
+body.dashboard-body {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(102, 126, 234, 0.35), transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(118, 75, 162, 0.35), transparent 45%),
+        linear-gradient(135deg, #1e2340 0%, #2d1b4e 50%, #1e2340 100%) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh !important;
+    color: #fff;
 }

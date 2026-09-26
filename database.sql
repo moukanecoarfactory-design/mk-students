@@ -33,16 +33,6 @@ CREATE TABLE `skills` (
   `skill_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `skills`
---
-
-INSERT INTO `skills` (`id`, `user_id`, `skill_name`) VALUES
-(13, 7, '- Phones,Laptops & Computers repairing'),
-(12, 7, '- programing phones and computers'),
-(15, 12, '- Phones,Laptops & Computers repairing.'),
-(14, 12, '- programing phones and computers');
-
 -- --------------------------------------------------------
 
 --
@@ -64,23 +54,7 @@ CREATE TABLE `users` (
   `role` enum('user','admin') NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `first_name`, ...) VALUES
-(5, 'MOHAMMED', 'MOUKANE', ...),
-(6, 'test', 'tes', ...),
-(7, 'MOHAMMED', 'mk', ...),
-(8, 'amin', 'laalem', ...),
-(10, 'MOHAMMED', 'MOUKANE', ...),
-(11, 'user1', '1', ...),
-(12, 'mohammed', 'moukane', ...),
-(13, 'Mohammed', 'MOUKANE', ...),
-(14, 'user', '22', ...);
---
--- Indexes for dumped tables
---
+-- --------------------------------------------------------
 
 --
 -- Indexes for table `skills`
@@ -97,30 +71,23 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
---
-
---
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- Constraints for dumped tables
---
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Constraints for table `skills`
 --
 ALTER TABLE `skills`
   ADD CONSTRAINT `skills_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
